@@ -1,0 +1,7 @@
+{
+    "git.ignoreLimitWarning": true,
+
+    "git.openRepositoryInParentFolders": "never",
+    "git.autoRepositoryDetection": "subFolders",
+    "git.repositoryScanMaxDepth": 2
+}
