@@ -375,6 +375,12 @@ def run():
                 ## Admin Side Data
                 query = 'select * from user_data;'
                 plot_data = pd.read_sql(query, connection)
+                
+                # Convert BLOB columns to strings
+                if len(plot_data) > 0:
+                    for col in ['Predicted_Field', 'User_level']:
+                        if col in plot_data.columns:
+                            plot_data[col] = plot_data[col].astype(str)
 
                 ## Pie chart for predicted field recommendations
                 labels = plot_data.Predicted_Field.unique()
@@ -389,7 +395,7 @@ def run():
                 labels = plot_data.User_level.unique()
                 values = plot_data.User_level.value_counts()
                 st.subheader("**Pie-Chart for User's Experienced Level**")
-                fig = px.pie(df, values=values, names=labels, title="Pie-Chart📈 for User's👨‍💻 Experienced Level")
+                fig = px.pie(values=values.values, names=values.index, title="Pie-Chart📈 for User's👨‍💻 Experienced Level")
                 st.plotly_chart(fig)
 
 
